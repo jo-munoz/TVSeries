@@ -78,7 +78,7 @@ namespace TVSeries.Clases
                 {
                     Console.Write("[" + Datos.Series[pos].IdSerie + "] ");
                     Console.Write(Datos.Series[pos].Nombre);
-                    Console.WriteLine(" URL: " + Datos.Series[pos].UrlIMDB);
+                    Console.WriteLine(" URL: " + Datos.Series[pos].UrlIMDB + " Género: " + Datos.Series[pos].Genero);                    
                 }
                 Console.WriteLine("\n1. Adicionar");
                 Console.WriteLine("2. Editar");
@@ -112,6 +112,7 @@ namespace TVSeries.Clases
                 {
                     Console.Write("[" + Datos.Paises[pos].IdPais + "] ");
                     Console.Write(Datos.Paises[pos].Nombre);
+                    Console.WriteLine("  ");
                 }
                 Console.WriteLine("\n1. Adicionar");
                 Console.WriteLine("2. Editar");
@@ -213,7 +214,8 @@ namespace TVSeries.Clases
             Console.Write("¿Código? "); int IdSerie = Convert.ToInt32(Console.ReadLine());
             Console.Write("¿Nombre? "); string Nombre = Console.ReadLine();
             Console.Write("¿URL en IMDB? "); string URL = Console.ReadLine();
-            if (Datos.SerieAdiciona(IdSerie, Nombre, URL))
+            Console.Write("¿Género? "); string Genero = Console.ReadLine();
+            if (Datos.SerieAdiciona(IdSerie, Nombre, URL, Genero))
                 Console.WriteLine("\nSerie adicionada. Presione ENTER para continuar");
             else
                 Console.WriteLine("\nError, código de serie ya existe. Presione ENTER para continuar");
@@ -228,7 +230,8 @@ namespace TVSeries.Clases
             int IdSerie = Convert.ToInt32(Console.ReadLine());
             Console.Write("¿Nombre? "); string Nombre = Console.ReadLine();
             Console.Write("¿URL en IMDB? "); string URL = Console.ReadLine();
-            if (Datos.SerieEdita(IdSerie, Nombre, URL))
+            Console.Write("¿Género? "); string Genero = Console.ReadLine();
+            if (Datos.SerieEdita(IdSerie, Nombre, URL, Genero))
                 Console.WriteLine("\nSerie editada. Presione ENTER para continuar");
             else
                 Console.WriteLine("\nError, código de serie inexistente. Presione ENTER para continuar");

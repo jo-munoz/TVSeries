@@ -38,13 +38,13 @@ namespace TVSeries.Clases
             Actores.Add(new ActorActriz(530, "Angela Sarafyan", "https://www.imdb.com/name/nm1494168/", 50));
 
             //Un listado de series
-            Series.Add(new Serie(171, "Better Than Us", "https://www.imdb.com/title/tt8285216/"));
-            Series.Add(new Serie(172, "Humans", "https://www.imdb.com/title/tt4122068/"));
-            Series.Add(new Serie(173, "Westworld", "https://www.imdb.com/title/tt0475784/"));
-            Series.Add(new Serie(174, "Real Humans", "https://www.imdb.com/title/tt2180271/"));
-            Series.Add(new Serie(175, "Almost Human", "https://www.imdb.com/title/tt2654580/"));
-            Series.Add(new Serie(176, "Battlestar Galactica", "https://www.imdb.com/title/tt0407362/"));
-            Series.Add(new Serie(177, "Metod", "https://www.imdb.com/title/tt5135336/"));
+            Series.Add(new Serie(171, "Better Than Us", "https://www.imdb.com/title/tt8285216/", "Acción"));
+            Series.Add(new Serie(172, "Humans", "https://www.imdb.com/title/tt4122068/", "Aventura"));
+            Series.Add(new Serie(173, "Westworld", "https://www.imdb.com/title/tt0475784/", "Ficción"));
+            Series.Add(new Serie(174, "Real Humans", "https://www.imdb.com/title/tt2180271/", "Drama"));
+            Series.Add(new Serie(175, "Almost Human", "https://www.imdb.com/title/tt2654580/", "Suspenso"));
+            Series.Add(new Serie(176, "Battlestar Galactica", "https://www.imdb.com/title/tt0407362/", "Acción"));
+            Series.Add(new Serie(177, "Metod", "https://www.imdb.com/title/tt5135336/", "Romantico"));
 
             //Añado actores y actrices a la serie "Better Than US"
             Relacion.Add(new ActorSerie(521, 172));
@@ -59,7 +59,6 @@ namespace TVSeries.Clases
             Relacion.Add(new ActorSerie(528, 173));
             Relacion.Add(new ActorSerie(529, 173));
             Relacion.Add(new ActorSerie(530, 173));
-
         }
 
         #region Actor
@@ -150,20 +149,21 @@ namespace TVSeries.Clases
         }
 
         //Adiciona serie a la lista de series. Error si el IdSerie ya existía.
-        public bool SerieAdiciona(int IdSerie, string Nombre, string URL)
+        public bool SerieAdiciona(int IdSerie, string Nombre, string URL, string Genero)
         {
             if (PosSerie(IdSerie) != -1) return false;
-            Series.Add(new Serie(IdSerie, Nombre, URL));
+            Series.Add(new Serie(IdSerie, Nombre, URL, Genero));
             return true;
         }
 
         //Edita serie de la lista de series. Error si el IdSerie no existe.
-        public bool SerieEdita(int IdSerie, string Nombre, string URL)
+        public bool SerieEdita(int IdSerie, string Nombre, string URL, string Genero)
         {
             int pos = PosSerie(IdSerie);
             if (pos == -1) return false;
             Series[pos].Nombre = Nombre;
             Series[pos].UrlIMDB = URL;
+            Series[pos].Genero = Genero;
             return true;
         }
 
