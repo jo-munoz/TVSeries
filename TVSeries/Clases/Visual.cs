@@ -118,7 +118,7 @@ namespace TVSeries.Clases
                 Console.WriteLine("3. Borrar");
                 Console.WriteLine("4. Detalles del pais");
                 Console.WriteLine("5. Asociar serie a pais");
-                Console.WriteLine("6. Desasociar serie a pais");
+                Console.WriteLine("6. Disociar serie a pais");
                 Console.WriteLine("7. Volver a menú principal");
                 Console.Write("¿Opción? ");
                 Opcion = Convert.ToInt32(Console.ReadLine());
@@ -127,9 +127,9 @@ namespace TVSeries.Clases
                     case 1: PaisAdiciona(); break;
                     case 2: PaisEdita(); break;
                     case 3: PaisBorra(); break;
-                    //case 4: SerieDetalle(); break;
+                    case 4: PaisDetalle(); break;
                     case 5: PaisAsocia(); break;
-                        //case 6: PaisDisocia(); break;
+                    case 6: PaisDisocia(); break;
                 }
             } while (Opcion != 7);
         }
@@ -354,6 +354,32 @@ namespace TVSeries.Clases
             Console.ReadKey();
         }
 
+        //Pantalla para ver el detalle del pais
+        public void PaisDetalle()
+        {
+            Console.WriteLine("\t === Detalle del pais ===");
+            Console.Write("¿Cuál? Escriba el número que está entre [ ]: ");
+            int IdPais = Convert.ToInt32(Console.ReadLine());
+
+            //Verifica si existe
+            if (Datos.ValidaExistencia(IdPais))
+            {
+                Console.WriteLine(Datos.NombrePais(IdPais));
+                Console.WriteLine("Series asociadas al pais:");
+                List<string> ListaSerie = Datos.PaisSerie(IdPais);
+                for (int cont = 0; cont < ListaSerie.Count; cont++)
+                    Console.WriteLine(ListaSerie[cont]);
+
+                Console.WriteLine("\nPresione ENTER para continuar");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("\nEl Id del pais no existe. Presione ENTER para continuar");
+                Console.ReadKey();
+            }
+        }
+
         //Asociar serie a un pais
         public void PaisAsocia()
         {
@@ -371,6 +397,33 @@ namespace TVSeries.Clases
                 Console.WriteLine("\nSerie asociado al pais. Presione ENTER para continuar");
             else
                 Console.WriteLine("\nError: serie inexistente o esa asociación ya existía. Presione ENTER para continuar");
+            Console.ReadKey();
+        }
+
+        //Pantalla para disociar serie de una pais
+        public void PaisDisocia()
+        {
+            Console.WriteLine("\t === Disociar serie de una pais ===");
+            Console.Write("¿Cuál pais? Escriba el número que está entre [ ]: ");
+            int IdPais = Convert.ToInt32(Console.ReadLine());
+
+            for (int pos = 0; pos < Datos.RelacionSeriePais.Count; pos++)
+            {
+                if (Datos.RelacionSeriePais[pos].CodigoPais == IdPais)
+                {
+                    Console.Write("[" + Datos.RelacionSeriePais[pos].CodigoSerie + "] ");
+                    Console.WriteLine(Datos.NombreSerie(Datos.RelacionSeriePais[pos].CodigoSerie));
+                }
+            }
+
+            Console.Write("¿Cuál serie quiere quitar? Escriba el número que está entre [ ]: ");
+            int IdSerie = Convert.ToInt32(Console.ReadLine());
+
+            if (Datos.PaisDisocia(IdSerie, IdPais))
+                Console.WriteLine("\nSerie retirado del pais. Presione ENTER para continuar");
+            else
+                Console.WriteLine("\nError: Serie/pais inexistente o esa asociación no existía. Presione ENTER para continuar");
+
             Console.ReadKey();
         }
         #endregion

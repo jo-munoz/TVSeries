@@ -323,6 +323,25 @@ namespace TVSeries.Clases
             return "NULL";
         }
 
+        //Retorna una lista con los nombres de las series que tienen ese pais
+        public List<string> PaisSerie(int IdPais)
+        {
+            List<string> Lista = new List<string>();
+            for (int pos = 0; pos < RelacionSeriePais.Count; pos++)
+                if (RelacionSeriePais[pos].CodigoPais == IdPais)
+                    Lista.Add(NombreSerie(RelacionSeriePais[pos].CodigoSerie));
+            return Lista;
+        }
+
+        public bool ValidaExistencia(int IdPais) {
+            //Verifica si existe
+            int existe = PosPais(IdPais);
+            if (existe == -1)            
+                return false;
+            else
+                return true;
+        }
+
         //Relaciona una serie con un pais.
         //Retorna false si la relación ya existía o no existen los códigos de serie o pais
         public bool PaisAsocia(int IdPais, int IdSerie)
@@ -340,7 +359,7 @@ namespace TVSeries.Clases
                 if (RelacionSeriePais[pos].CodigoSerie == IdSerie && RelacionSeriePais[pos].CodigoPais == IdPais)
                     return false;
             }
-            Relacion.Add(new ActorSerie(IdSerie, IdPais));
+            RelacionSeriePais.Add(new SeriePais(IdSerie, IdPais));
             return true;
         }
 
