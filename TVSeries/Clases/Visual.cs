@@ -9,11 +9,14 @@ namespace TVSeries.Clases
     class Visual    //Lo que ve el usuario final
     {
         public PersisteLogica Datos;
+
+        //Constructor
         public Visual(PersisteLogica objDatos)
         {
             Datos = objDatos;
         }
 
+        #region Pantallas del usuario
         public void Menu()
         {
             int opcion;
@@ -134,6 +137,7 @@ namespace TVSeries.Clases
                 }
             } while (Opcion != 7);
         }
+        #endregion
 
         //Muestra los países
         public void MostrarPaises()
@@ -323,10 +327,18 @@ namespace TVSeries.Clases
             Console.WriteLine("\tAdicionar pais al listado");
             Console.Write("¿Código? "); int IdPais = Convert.ToInt32(Console.ReadLine());
             Console.Write("¿Nombre? "); string Nombre = Console.ReadLine();
-            if (Datos.PaisAdiciona(IdPais, Nombre))
-                Console.WriteLine("\npais adicionada. Presione ENTER para continuar");
+
+            bool val = false;
+            val = Datos.PaisAdiciona(IdPais, Nombre);
+
+            if (val == true){
+                Console.WriteLine("\npais adicionado. Presione ENTER para continuar");
+            }                
             else
+            {
                 Console.WriteLine("\nError, código de pais ya existe. Presione ENTER para continuar");
+            }
+            
             Console.ReadKey();
         }
 
@@ -338,7 +350,7 @@ namespace TVSeries.Clases
             int IdPais = Convert.ToInt32(Console.ReadLine());
             Console.Write("¿Nombre? "); string Nombre = Console.ReadLine();
             if (Datos.PaisEdita(IdPais, Nombre))
-                Console.WriteLine("\nPais editada. Presione ENTER para continuar");
+                Console.WriteLine("\nPais editado. Presione ENTER para continuar");
             else
                 Console.WriteLine("\nError, código de pais inexistente. Presione ENTER para continuar");
             Console.ReadKey();

@@ -281,7 +281,10 @@ namespace TVSeries.Clases
         //Adiciona pais a la lista de Paises. Error si el IdPais ya existía.
         public bool PaisAdiciona(int IdPais, string Nombre)
         {
-            if (PosSerie(IdPais) != -1) return false;
+            int val = 0;
+            val = PosSerie(IdPais);
+
+            if (val == -1) return false;
             Paises.Add(new Pais(IdPais, Nombre));
             return true;
         }
@@ -346,7 +349,6 @@ namespace TVSeries.Clases
         //Retorna false si la relación ya existía o no existen los códigos de serie o pais
         public bool PaisAsocia(int IdPais, int IdSerie)
         {
-
             //Valida existencia de serie y pais            
             bool SerieExiste = false;
             bool PaisExiste = false;
