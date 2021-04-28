@@ -282,9 +282,9 @@ namespace TVSeries.Clases
         public bool PaisAdiciona(int IdPais, string Nombre)
         {
             int val = 0;
-            val = PosSerie(IdPais);
+            val = PosPais(IdPais);
 
-            if (val == -1) return false;
+            if (val != -1) return false;
             Paises.Add(new Pais(IdPais, Nombre));
             return true;
         }
